@@ -83,8 +83,8 @@ class Pos:
 	def dist(self, pos2):
 		return math.sqrt(math.pow((self.x - pos2.x), 2) + math.pow((self.y - pos2.y),2))
 
-	def equals(self, pos2):
-		if self.x1 == pos2.x1 and self.x2 == pos2.x2 and self.y1 == pos2.y1 and self.y2 == pos2.y2:
+	def equals(self, pos2):	
+		if ((self.x1 == pos2.x2 or self.x2 == pos2.x1) and self.y1 == pos2.y1)  or ((self.y1 == pos2.y2 or self.y2 == pos2.y1) and self.x1 == pos2.x1):
 			return True
 		return False
 

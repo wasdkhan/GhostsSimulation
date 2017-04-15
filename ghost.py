@@ -20,8 +20,11 @@ class Ghost:
 				rDist = rPos.dist(tpos)
 			if lDist < rDist:
 				self.pos = lPos
-			elif rDist >= lDist:
+			elif rDist > lDist:
 				self.pos = rPos
+			else:
+				self.pos.orient = (self.pos.orient - 2) % 4
+				self.pos = self.pos.nPos()
 		elif val == 8:
 			lPos, fPos, rPos = nextPos.adjPos()
 			lDist = 1000000
