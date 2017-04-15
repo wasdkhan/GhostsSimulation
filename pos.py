@@ -75,20 +75,32 @@ class Pos:
 	def adjPos(self):
 		rOrient = (self.orient + 1) % 4
 		lOrient = (self.orient - 1) % 4
-		lPos = Pos((self.x1, self.x2, self.y1, self.y2), rOrient).nPos()
-		rPos = Pos((self.x1, self.x2, self.y1, self.y2), lOrient).nPos()
-		return lPos, rPos
+		lPos = Pos((self.x1, self.x2, self.y1, self.y2), lOrient).nPos()
+		rPos = Pos((self.x1, self.x2, self.y1, self.y2), rOrient).nPos()
+		fPos = Pos((self.x1, self.x2, self.y1, self.y2), self.orient).nPos()
+		return lPos, fPos, rPos
 
 	def dist(self, pos2):
 		apos1 = ((self.x1 + self.x2)/2, (self.y1 + self.y2)/2)
 		apos2 = ((pos2.x1 + pos2.x2)/2, (pos2.y1 + pos2.y2)/2)
 		return math.sqrt(math.pow((apos1[0] - apos2[0]),2) + math.pow((apos1[1] - apos2[1]),2))
 
+	def equals(self, pos2):
+		if self.x1 == pos2.x1 and self.x2 == pos2.x2 and self.y1 == pos2.y1 and self.y2 == pos2.y2:
+			return True
+		return False
+
 	def printC(self):
 		print self.x1, self.x2 
 		print self.y1, self.y2
-		print self.orient
+		self.printOrient()
 
 	def printD(self):
 		print self.x, self.y
-		print self.orient
+		self.printOrient()
+
+	def printOrient(self):
+		if self.orient == UP: print "UP"
+		elif self.orient == LEFT: print "LEFT"
+		elif self.orient == RIGHT: print "RIGHT"
+		else: print "DOWN"
