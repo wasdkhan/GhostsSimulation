@@ -1,3 +1,5 @@
+import numpy as np
+
 PELLET = 9
 DECISION = 8
  
@@ -5,12 +7,12 @@ BLOCK = 0
 FORBIDDEN = 2
 DEN = 3
 
-PACMAN = 10
-BLINKY = -1
+PACMAN = 12
+BLINKY = -2
 
 class Map:
 	def __init__(self):
-		self.map = [
+		self.map = np.asarray([
 		    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		    [0,8,8,9,9,9,8,8,9,9,9,9,8,8,0,8,8,9,9,9,9,8,8,9,9,9,8,8,0],
 		    [0,8,8,9,9,9,8,8,9,9,9,9,8,8,0,8,8,9,9,9,9,8,8,9,9,9,8,8,0],
@@ -43,7 +45,7 @@ class Map:
 		    [0,8,8,9,9,9,9,9,9,9,9,9,8,8,9,8,8,9,9,9,9,9,9,9,9,9,8,8,0],
 		    [0,8,8,9,9,9,9,9,9,9,9,9,8,8,9,8,8,9,9,9,9,9,9,9,9,9,8,8,0],
 		    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		]
+		])
 
 	def valPos(self, pos): #return the value of the position
 		if pos.y1 < 0 or pos.y2 < 0 or pos.x1 < 0 or pos.x2 < 0: #not valid indey
@@ -59,17 +61,17 @@ class Map:
 		if self.map[pos.y1][pos.x1] == 8 or self.map[pos.y2][pos.x1] == 8 or self.map[pos.y1][pos.x2] == 8 or self.map[pos.y2][pos.x2] == 8: #decision node
 			return 8
 
-	# def colorPos(self, pos, actor):
-	# 	if actor == PACMAN:
-	# 		self.map[pos.y1][pos.x1] = 10
-	# 		self.map[pos.y2][pos.x1] = 10
-	# 		self.map[pos.y1][pos.x2] = 10
-	# 		self.map[pos.y2][pos.x2] = 10
-	# 	elif actor == BLINKY:
-	# 		self.map[pos.y1][pos.x1] = -1
-	# 		self.map[pos.y2][pos.x1] = -1
-	# 		self.map[pos.y1][pos.x2] = -1
-	# 		self.map[pos.y2][pos.x2] = -1
+	def colorPos(self, pos, actor):
+		if actor == PACMAN:
+			self.map[pos.y1][pos.x1] = 10
+			self.map[pos.y2][pos.x1] = 10
+			self.map[pos.y1][pos.x2] = 10
+			self.map[pos.y2][pos.x2] = 10
+		elif actor == BLINKY:
+			self.map[pos.y1][pos.x1] = -1
+			self.map[pos.y2][pos.x1] = -1
+			self.map[pos.y1][pos.x2] = -1
+			self.map[pos.y2][pos.x2] = -1
 
-	# def resetColor(self, map2):
-	# 	self.map = map2
+	def resetColor(self, map2):
+		np.copyto(self.map, map2)

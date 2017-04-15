@@ -81,9 +81,7 @@ class Pos:
 		return lPos, fPos, rPos
 
 	def dist(self, pos2):
-		apos1 = ((self.x1 + self.x2)/2, (self.y1 + self.y2)/2)
-		apos2 = ((pos2.x1 + pos2.x2)/2, (pos2.y1 + pos2.y2)/2)
-		return math.sqrt(math.pow((apos1[0] - apos2[0]),2) + math.pow((apos1[1] - apos2[1]),2))
+		return math.sqrt(math.pow((self.x - pos2.x), 2) + math.pow((self.y - pos2.y),2))
 
 	def equals(self, pos2):
 		if self.x1 == pos2.x1 and self.x2 == pos2.x2 and self.y1 == pos2.y1 and self.y2 == pos2.y2:
